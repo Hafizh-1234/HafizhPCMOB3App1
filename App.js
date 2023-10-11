@@ -1,21 +1,50 @@
 
-import { useState } from "react";
-import { Text, Pressable, StyleSheet, View, FlatList } from "react-native";
+import { useState, useEffect } from "react";
+import { Text, Pressable, StyleSheet, View, FlatList, Button } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import BlockRGB from "./components/BlockRGB";
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
+  useEffect(() => {
+    navigation.setOptions({
+    headerRight: () => <Button onPress={addColor} title="Add colour" />
+    });
+    });
+    
+
+
+
+
+
+
+
   const [colorArray, setColorArray] = useState([
     { red: 255, green: 0, blue: 0, id: "0" },
     { red: 0, green: 255, blue: 0, id: "1" },
     { red: 0, green: 0, blue: 255, id: "2" }
   ]);
   
+
+
+ 
+
+
+
+
+
   function renderItem({ item }) {
-    return <BlockRGB red={item.red} green={item.green} blue={item.blue} />;
+    return (
+
+      <Pressable
+      onPress={() => {
+      navigation.navigate("Details", item);
+      }}>
+    
+    <BlockRGB red={item.red} green={item.green} blue={item.blue} />
+  </Pressable>
+    );
   }
-  
   
   
  
@@ -75,7 +104,31 @@ function HomeScreen() {
     </View>
     );
   }
-  
+
+
+  function DetailsScreen({ route }) {
+    const { red, green, blue } = route.params;
+    
+    
+    return (
+    <View
+    style={[
+    styles.container,
+    { backgroundColor: `rgb(${red}, ${green}, ${blue})` }
+    ]}>
+    <View style={{ padding: 30 }}>
+    <Text style={{ fontSize: 20, padding: 10 }}>Red: {red}</Text>
+    <Text style={{ fontSize: 20, padding: 10 }}>Green: {green}</Text>
+    <Text style={{ fontSize: 20, padding: 10 }}>Blue: {blue}</Text>
+    </View>
+    </View>
+    );
+    }
+    
+    
+
+
+
 
   const Stack = createStackNavigator();
   
@@ -84,6 +137,7 @@ function HomeScreen() {
       <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen name="Colour List" component={HomeScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
       </NavigationContainer>
       );
