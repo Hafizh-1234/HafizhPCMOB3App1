@@ -109,21 +109,20 @@ function HomeScreen({ navigation }) {
   function DetailsScreen({ route }) {
     const { red, green, blue } = route.params;
     
-    
     return (
-    <View
-    style={[
-    styles.container,
-    { backgroundColor: `rgb(${red}, ${green}, ${blue})` }
-    ]}>
-    <View style={{ padding: 30 }}>
-    <Text style={{ fontSize: 20, padding: 10 }}>Red: {red}</Text>
-    <Text style={{ fontSize: 20, padding: 10 }}>Green: {green}</Text>
-    <Text style={{ fontSize: 20, padding: 10 }}>Blue: {blue}</Text>
-    </View>
-    </View>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: `rgb(${red}, ${green}, ${blue})` }
+        ]}>
+        <View style={{ padding: 150 }}>
+          <Text style={{ fontSize: 20, padding: 10, color: "white" }}>Red: {red}</Text>
+          <Text style={{ fontSize: 20, padding: 10, color: "white" }}>Green: {green}</Text>
+          <Text style={{ fontSize: 20, padding: 10, color: "white" }}>Blue: {blue}</Text>
+        </View>
+      </View>
     );
-    }
+  }
     
     
 
